@@ -26,4 +26,6 @@ The integration of these two stages forms the QuantumGenetic Classifier. The gen
 ## Usage
 This solution is designed to tackle classification problems. It can be used in any scenario where a classification model is required, such as binary classification tasks in machine learning. The only requirement is to feed in the training and testing data. The algorithm handles the rest, from the creation of the quantum circuits to the optimization of parameters using the genetic algorithm.
 
-.cbrwx
+The only difference between the two files provided is the use of the IBMQ backend, and consequently whatever that might entail.
+
+.cbrwx.
