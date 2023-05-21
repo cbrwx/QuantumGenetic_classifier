@@ -22,6 +22,17 @@ By integrating these two stages, the QuantumGenetic Classifier optimizes the par
 ## Usage
 The QuantumGenetic Classifier is designed to solve classification problems and can be utilized in any scenario where a classification model is required, including binary classification tasks in machine learning. To use the classifier, you need to provide the training and testing data. The algorithm takes care of the rest, from creating the quantum circuits to optimizing the parameters using the genetic algorithm.
 
+# Custom Data Integration:
+To use your own data with the code, you can follow these steps:
+
+- Prepare your Training and Testing Data: Instead of using the ad_hoc_data function, you will need to prepare your own training and testing datasets. Ensure that the datasets are formatted appropriately, with the features and corresponding labels properly structured.
+
+- Replace the Training and Testing Data Variables: Assign your own training and testing datasets to the training_input and test_input variables, respectively. Make sure to update the variables training_dataset_size and testing_dataset_size with the appropriate sizes of your datasets.
+
+- Map Labels (if necessary): If your labels are not in the desired format, you may need to perform label mapping. Use the map_label_to_class_name function to map your labels to class names if required.
+
+- Modify the Feature Map and Variational Form Functions (if necessary): Depending on the characteristics of your data, you may need to customize the custom_feature_map and custom_variational_form functions to match the number of features in your data and the complexity of the classification task.
+
 Please note that the provided code examples assume the use of the IBM Quantum backend, but you can adapt it to different environments or backends based on your specific requirements.
 
 .cbrwx
