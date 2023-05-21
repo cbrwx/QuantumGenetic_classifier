@@ -1,31 +1,27 @@
 # QuantumGenetic Classifier
 
 ## Overview
-QuantumGenetic Classifier is a machine learning solution that integrates the power of quantum computing with classical genetic algorithms. It employs a Variational Quantum Classifier (VQC), an algorithm that leverages quantum computing to classify data, combined with genetic algorithms for the optimization of the quantum circuit parameters. This approach optimizes the performance of the quantum classifier, offering potentially improved results over traditional quantum or classical methods.
+QuantumGenetic Classifier is a machine learning solution that combines the power of quantum computing with classical genetic algorithms to perform classification tasks. It utilizes a Variational Quantum Classifier (VQC), which leverages quantum circuits to classify data, and employs genetic algorithms for optimizing the quantum circuit parameters. This approach aims to improve classification accuracy by optimizing the performance of the quantum classifier.
 
 ## Technical Details
-QuantumGenetic Classifier operates in two main stages:
+The QuantumGenetic Classifier consists of two main stages:
 
-- Variational Quantum Classification (VQC)**: In this stage, a quantum classifier is utilized to classify data points. The VQC uses a quantum circuit, which is characterized by a feature map and a variational form. The feature map encodes classical data into quantum states while the variational form, controlled by a set of parameters, is responsible for the transformation of these quantum states. The output of the VQC gives the classification of the input data.
+- **Variational Quantum Classification (VQC):** In this stage, a quantum circuit is used to classify data points. The quantum circuit comprises a feature map and a variational form. The feature map encodes classical data into quantum states, while the variational form, controlled by a set of parameters, transforms these quantum states. The output of the VQC provides the classification of the input data.
 
-- Genetic Algorithm Optimization**: The second stage is where the Genetic Algorithm (GA) comes into play. The GA is a bio-inspired algorithm for global optimization that mimics the process of natural selection. Here, the GA is employed to find the optimal set of parameters for the variational form in the VQC. Each individual in the population represents a different set of parameters. The GA applies genetic operators like selection, crossover, and mutation over multiple generations to evolve the population, seeking the set of parameters that minimizes the test error of the VQC.
+- **Genetic Algorithm Optimization:** The second stage involves the use of a Genetic Algorithm (GA) to optimize the parameters of the variational form in the VQC. The GA is a bio-inspired algorithm that emulates natural selection to find the optimal set of parameters. Each individual in the GA population represents a different set of parameters, and through selection, crossover, and mutation operations, the GA evolves the population to minimize the test error of the VQC.
 
-The integration of these two stages forms the QuantumGenetic Classifier. The genetic algorithm iteratively refines the parameters of the quantum circuit to increase the accuracy of the quantum classifier. This synergy between quantum computing and classical genetic algorithms exploits the strengths of both paradigms to enhance the classification performance.
+By integrating these two stages, the QuantumGenetic Classifier optimizes the parameters of the quantum circuit using a genetic algorithm, aiming to improve the classification performance.
 
 ## Key Features
-- Parameterized Quantum Circuits**: Parameterization allows fine-tuning of the quantum circuits, enabling better performance of the VQC.
-
-- Genetic Algorithm Optimization**: The GA provides a robust method for finding optimal parameters that might not be found by gradient-based methods, potentially leading to improved performance of the VQC.
-
-- Fitness Evaluation**: Fitness evaluation is based on the test accuracy of the VQC. The GA therefore evolves the parameters towards those that yield the highest test accuracy.
-
-- Preservation of Best Solutions**: The Hall of Fame feature of the GA preserves the best solution found during the evolution process.
-
-- Utilization of Standard Genetic Operators**: The implementation employs standard genetic operators like mutation (Gaussian) and crossover (blend) to generate new offspring.
+- **Parameterized Quantum Circuits:** The QuantumGenetic Classifier allows parameterization of quantum circuits, enabling fine-tuning and optimization of the VQC, leading to improved performance.
+- **Genetic Algorithm Optimization:** The GA provides a robust optimization method that can discover parameter configurations that may not be found by gradient-based methods, potentially enhancing the performance of the VQC.
+- **Fitness Evaluation:** The fitness of individuals in the GA population is evaluated based on the test accuracy of the VQC. The GA evolves the parameters towards solutions that yield higher test accuracy.
+- **Preservation of Best Solutions:** The QuantumGenetic Classifier includes a Hall of Fame feature that preserves the best solution found during the evolution process, ensuring that the optimal parameter configuration is not lost.
+- **Utilization of Standard Genetic Operators:** The implementation incorporates standard genetic operators, such as mutation (Gaussian) and crossover (blend), to generate new offspring with diverse parameter configurations.
 
 ## Usage
-This solution is designed to tackle classification problems. It can be used in any scenario where a classification model is required, such as binary classification tasks in machine learning. The only requirement is to feed in the training and testing data. The algorithm handles the rest, from the creation of the quantum circuits to the optimization of parameters using the genetic algorithm.
+The QuantumGenetic Classifier is designed to solve classification problems and can be utilized in any scenario where a classification model is required, including binary classification tasks in machine learning. To use the classifier, you need to provide the training and testing data. The algorithm takes care of the rest, from creating the quantum circuits to optimizing the parameters using the genetic algorithm.
 
-The only difference between the two files provided is the use of the IBMQ backend, and consequently whatever that might entail.
+Please note that the provided code examples assume the use of the IBM Quantum backend, but you can adapt it to different environments or backends based on your specific requirements.
 
-.cbrwx.
+.cbrwx
