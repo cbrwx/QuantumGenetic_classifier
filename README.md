@@ -17,12 +17,15 @@ By integrating these two stages, the QuantumGenetic Classifier optimizes the par
 - **Genetic Algorithm Optimization:** The GA provides a robust optimization method that can discover parameter configurations that may not be found by gradient-based methods, potentially enhancing the performance of the VQC.
 - **Fitness Evaluation:** The fitness of individuals in the GA population is evaluated based on the test accuracy of the VQC. The GA evolves the parameters towards solutions that yield higher test accuracy.
 - **Preservation of Best Solutions:** The QuantumGenetic Classifier includes a Hall of Fame feature that preserves the best solution found during the evolution process, ensuring that the optimal parameter configuration is not lost.
-- **Utilization of Standard Genetic Operators:** The implementation incorporates standard genetic operators, such as mutation (Gaussian) and crossover (blend), to generate new offspring with diverse parameter configurations.
+- **Utilization of Standard Genetic Operators:** The implementation incorporates standard genetic operators, such as mutation (uniform) and crossover (uniform), to generate new offspring with diverse parameter configurations.
+- **Customizable Feature Map and Variational Form Functions:** The QuantumGenetic Classifier allows users to define their own feature map and variational form functions with parameters to further customize the VQC according to their specific problem requirements.
+- **Decision Boundary Visualization:** The implementation includes a function for plotting decision boundaries of the VQC, enabling users to visualize the classification performance on the test dataset.
+- **Efficient Transpilation:** The QuantumGenetic Classifier incorporates transpilation techniques to improve the computational efficiency of the quantum circuits.
 
 ## Usage
 The QuantumGenetic Classifier is designed to solve classification problems and can be utilized in any scenario where a classification model is required, including binary classification tasks in machine learning. To use the classifier, you need to provide the training and testing data. The algorithm takes care of the rest, from creating the quantum circuits to optimizing the parameters using the genetic algorithm.
 
-# Custom Data Integration:
+## Custom Data Integration:
 To use your own data with the code, you can follow these steps:
 
 - Prepare your Training and Testing Data: Instead of using the ad_hoc_data function, you will need to prepare your own training and testing datasets. Ensure that the datasets are formatted appropriately, with the features and corresponding labels properly structured.
