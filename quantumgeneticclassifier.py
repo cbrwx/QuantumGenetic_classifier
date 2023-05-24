@@ -151,7 +151,7 @@ def eval_fitness(individual):
 
     return (fitness,)
 
-# Set up the Genetic Algorithm
+# Setup the Genetic Algorithm
 population_size = 50
 num_generations = 10
 
