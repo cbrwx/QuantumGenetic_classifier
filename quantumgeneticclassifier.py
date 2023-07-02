@@ -54,29 +54,36 @@ def multi_class_predict(vqc_classifier, data):
     return np.argmax(probabilities, axis=1)
 
 # Call the 'plot_decision_boundaries' function with the trained vqc and test input data
-def plot_decision_boundaries(vqc_classifier, datapoints, class_to_label):
+def plot_decision_boundaries(vqc_classifier, datapoints, class_map):
     h = .02  # step size in the mesh
-    cmap_light = ListedColormap(['orange', 'cyan'])
-    cmap_bold = ListedColormap(['darkorange', 'c'])
-    xx, yy = np.meshgrid(np.arange(0, 2 * np.pi, h),
-                         np.arange(0, 1 * np.pi, h))
+    cmap_light = ListedColormap(['#FFAAAA', '#AAFFAA','#00AAFF'])
+    cmap_bold = ListedColormap(['#FF0000', '#00FF00','#00AAFF'])
 
-    Z = np.array([multi_class_predict(vqc_classifier, np.array([xx, yy]).reshape(-1, 2))])
+    # Generate a meshgrid
+    x_min, x_max = datapoints[:, 0].min() - 1, datapoints[:, 0].max() + 1
+    y_min, y_max = datapoints[:, 1].min() - 1, datapoints[:, 1].max() + 1
+    xx, yy = np.meshgrid(np.arange(x_min, x_max, h),
+                         np.arange(y_min, y_max, h))
+
+    Z = np.array([multi_class_predict(vqc_classifier, np.c_[xx.ravel(), yy.ravel()])])
     Z = Z.reshape(xx.shape)
 
-    plt.colorbar(plt.pcolormesh(xx, yy, Z, cmap=cmap_light))
+    # Plot the decision boundary
+    plt.figure(figsize=(7, 7))
+    plt.contourf(xx, yy, Z, cmap=cmap_light)
 
-    # Scatter plot of the data points
-    scatter_x, scatter_y = datapoints[:, 0], datapoints[:, 1]
-
-    for index in range(len(scatter_x)):
-        plt.scatter(scatter_x[index], scatter_y[index], color=['red', 'blue'][int(datapoints[index][2])], marker='o')
-
-    plt.xlim(xx.min(), xx.max())
-    plt.ylim(yy.min(), yy.max())
+    # Plot class samples
+    for idx, class_name in enumerate(class_map):
+        plt.scatter(datapoints[class_map[class_name]][:, 0], datapoints[class_map[class_name]][:, 1], 
+                    cmap=cmap_bold, marker='o', label=class_name, edgecolor='k')
+        
+    plt.xlim(datapoints[:, 0].min() - 0.5, datapoints[:, 0].max() + 0.5)
+    plt.ylim(datapoints[:, 1].min() - 0.5, datapoints[:, 1].max() + 0.5)
+    plt.title('Variational Quantum Classifier Decision Boundaries')
     plt.xlabel('Feature Dimension 1')
     plt.ylabel('Feature Dimension 2')
-    plt.title('Variational Quantum Classifier Decision Boundaries')
+    plt.legend()
+    plt.grid(True)
     plt.show()
 
 # Customizing transpilation to improve the computational efficiency
