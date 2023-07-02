@@ -1,26 +1,22 @@
-from qiskit import QuantumCircuit, QuantumRegister, transpile, assemble, Aer, execute, IBMQ
-from qiskit.circuit.library import EfficientSU2, QFT
+from qiskit import QuantumCircuit, QuantumRegister, IBMQ
+from qiskit.circuit.library import QFT
 from qiskit.aqua import QuantumInstance
 from qiskit.aqua.algorithms import VQC
 from qiskit.aqua.components.optimizers import COBYLA
 from qiskit.aqua.utils import split_dataset_to_data_and_labels, map_label_to_class_name
 from qiskit.ml.datasets import ad_hoc_data
-from qiskit.providers.aer.noise import NoiseModel
 from qiskit.ignis.mitigation.measurement import CompleteMeasFitter
 from qiskit.providers.ibmq import least_busy
 from qiskit.ignis.mitigation.measurement import complete_meas_cal
-from qiskit.transpiler import PassManager, Layout
+from qiskit.transpiler import PassManager
 from qiskit.transpiler.passes import Collect2qBlocks, ConsolidateBlocks, Optimize1qGates
 from qiskit.visualization import plot_histogram
 import matplotlib.pyplot as plt
 from matplotlib.colors import ListedColormap
 import numpy as np
 from qiskit.circuit import Parameter
-from qiskit.algorithms.optimizers import ADAM
 import random
 from deap import creator, base, tools, algorithms
-from qiskit.runtime import RuntimeEncoder, RuntimeDecoder
-from qubovert import QAOA
 
 IBMQ.save_account('YOUR_API_TOKEN', overwrite=True)  # Replace with your actual API token
 provider = IBMQ.load_account()
