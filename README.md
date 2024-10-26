@@ -36,6 +36,130 @@ To use your own data with the code, you can follow these steps:
 
 - Modify the Feature Map and Variational Form Functions (if necessary): Depending on the characteristics of your data, you may need to customize the custom_feature_map and custom_variational_form functions to match the number of features in your data and the complexity of the classification task.
 
+Here's a concrete example of using the system for a binary classification task, with step-by-step execution and output:
+
+```
+from qiskit import IBMQ
+import numpy as np
+
+# 1. First, let's set up the system with your IBMQ credentials
+IBMQ.save_account('YOUR_API_TOKEN')
+
+# 2. Create a simple dataset (you can replace this with your own data)
+def create_sample_dataset():
+    # Create two interleaved half moons
+    n_samples = 100
+    noise = 0.1
+    
+    # First half moon
+    t = np.linspace(0, np.pi, n_samples//2)
+    x1 = np.cos(t)
+    y1 = np.sin(t) + np.random.normal(0, noise, n_samples//2)
+    
+    # Second half moon
+    x2 = np.cos(t + np.pi)
+    y2 = np.sin(t + np.pi) + np.random.normal(0, noise, n_samples//2)
+    
+    X = np.vstack([np.column_stack((x1, y1)), np.column_stack((x2, y2))])
+    y = np.hstack([np.zeros(n_samples//2), np.ones(n_samples//2)])
+    
+    return X, y
+
+# 3. Run the example
+def run_classification_example():
+    # Create dataset
+    X, y = create_sample_dataset()
+    print("Dataset created with shape:", X.shape)
+    
+    # Initialize the quantum ML system
+    quantum_ml = AdvancedQuantumMLSystem(
+        n_qubits=4,  # Number of qubits to use
+        n_layers=2,  # Number of quantum layers
+        backend_name='ibmq_qasm_simulator'  # Use simulator for this example
+    )
+    
+    # Initialize data pipeline
+    data_pipeline = QuantumDataPipeline(n_qubits=4)
+    X_train, X_test, y_train, y_test = data_pipeline.prepare_data(X, y)
+    
+    print("\nStarting training...")
+    # Train the model
+    history = quantum_ml.train(
+        X_train,
+        y_train,
+        epochs=20,  # Reduced epochs for example
+        batch_size=16
+    )
+    
+    # Evaluate the model
+    metrics = quantum_ml.evaluate(X_test, y_test)
+    print("\nTest Results:")
+    print(f"Accuracy: {metrics['accuracy']:.4f}")
+    print(f"Quantum Circuit Depth: {metrics['circuit_depth']}")
+    
+    # Visualize results
+    visualizer = QuantumVisualization(quantum_ml)
+    visualizer.plot_training_history()
+    visualizer.plot_decision_boundary(X, y)
+    
+    return quantum_ml, metrics
+
+# 4. Add some example predictions
+def make_predictions(quantum_ml, X_new):
+    # Example of making predictions for new data points
+    predictions = quantum_ml.predict(X_new)
+    return predictions
+
+if __name__ == "__main__":
+    # Run the complete example
+    print("Starting Quantum ML Classification Example...")
+    
+    # Run main classification
+    quantum_ml, metrics = run_classification_example()
+    
+    # Make some example predictions
+    X_new = np.array([
+        [0.5, 0.5],
+        [-0.5, -0.5],
+        [0.0, 1.0]
+    ])
+    
+    predictions = make_predictions(quantum_ml, X_new)
+    print("\nPredictions for new data points:")
+    for i, pred in enumerate(predictions):
+        print(f"Point {i+1}: Class {pred}")
+    
+    # Save the model
+    quantum_ml.save_model("example_quantum_model.json")
+    print("\nModel saved successfully!")
+```
+Expected output would look something like this:
+
+```
+Starting Quantum ML Classification Example...
+Dataset created with shape: (100, 2)
+
+Starting training...
+Epoch 1/20: Loss = 0.6931, Accuracy = 0.5120
+Epoch 5/20: Loss = 0.5823, Accuracy = 0.6875
+Epoch 10/20: Loss = 0.4256, Accuracy = 0.8125
+Epoch 15/20: Loss = 0.3845, Accuracy = 0.8750
+Epoch 20/20: Loss = 0.3521, Accuracy = 0.9062
+
+Test Results:
+Accuracy: 0.8950
+Quantum Circuit Depth: 24
+
+Predictions for new data points:
+Point 1: Class 0
+Point 2: Class 1
+Point 3: Class 0
+
+Model saved successfully!
+```
+
+
+
 Please note that the provided code examples assume the use of the IBM Quantum backend, but you can adapt it to different environments or backends based on your specific requirements.
 
 .cbrwx
